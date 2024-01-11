@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mall4j-admin:
+    build:
+      context: ./
+      dockerfile: ./yami-shop-admin/Dockerfile
+    restart: always
+    container_name: mall4j-admin
+    environment:
+      - REDIS_HOST=127.0.0.1
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+    image: mall4j-admin
+    ports:
+      - 8085:8085
+
+  mall4j-api:
+    build:
+      context: ./
+      dockerfile: ./yami-shop-api/Dockerfile
+    restart: always
+    container_name: mall4j-api
+    environment:
+      - REDIS_HOST=127.0.0.1
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+    image: mall4j-api
+    ports:
+      - 8086:8086

@@ -1,9 +1,6 @@
 version: '3'
 services:
   mall4j-admin:
-    build:
-      context: ./
-      dockerfile: ./yami-shop-admin/Dockerfile
     restart: always
     container_name: mall4j-admin
     environment:
@@ -13,7 +10,7 @@ services:
       - REDIS_HOST=host.docker.internal
       - REDIS_PORT=6379
       - REDIS_DATABASE=0
-    image: mall4j-admin
+    image: mall4j-admin:latest
     volumes:
       - /logs/admin:/logs/admin
     ports:
@@ -22,11 +19,8 @@ services:
       - host.docker.internal:host-gateway
 
   mall4j-api:
-    build:
-      context: ./
-      dockerfile: ./yami-shop-api/Dockerfile
     restart: always
-    container_name: mall4j-api
+    container_name: mall4j-api:latest
     environment:
       - MYSQL_HOST=host.docker.internal
       - MYSQL_USERNAME=root
@@ -43,7 +37,7 @@ services:
       - host.docker.internal:host-gateway
 
   web:
-    image: wineweb:2.0
+    image: wineweb:1.0
     container_name: mall4j-web
     ports:
       - 80:80
